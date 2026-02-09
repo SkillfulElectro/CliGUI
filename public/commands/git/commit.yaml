@@ -1,0 +1,113 @@
+id: "git-commit"
+name: "git commit"
+category: "git"
+os: ["linux", "macos", "windows"]
+description: "Record changes to the repository"
+base: "git commit"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["git", "commit", "save", "version"]
+
+args:
+  # Message options
+  - id: "message"
+    flag: "-m"
+    name: "Message"
+    type: "text"
+    required: true
+    placeholder: "feat: add new feature"
+    description: "The commit message"
+    group: "Message"
+
+  # Staging options
+  - id: "all"
+    flag: "-a"
+    name: "Stage All"
+    type: "checkbox"
+    default: false
+    description: "Automatically stage modified and deleted files"
+    warning: "Includes ALL modified files"
+    group: "Staging"
+
+  # Modification options
+  - id: "amend"
+    flag: "--amend"
+    name: "Amend"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Replace the tip of the current branch by creating a new commit"
+    warning: "Don't amend pushed commits!"
+    group: "Modify"
+
+  - id: "no-edit"
+    flag: "--no-edit"
+    name: "No Edit"
+    type: "checkbox"
+    default: false
+    description: "Use the selected commit message without launching an editor"
+    depends_on: ["amend"]
+    group: "Modify"
+
+  - id: "fixup"
+    flag: "--fixup"
+    name: "Fixup"
+    type: "text"
+    placeholder: "HEAD~1"
+    description: "Create a fixup commit for the given commit"
+    conflicts_with: ["message", "amend"]
+    group: "Modify"
+
+  # Verification options
+  - id: "no-verify"
+    flag: "-n"
+    name: "Skip Hooks"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Bypass pre-commit and commit-msg hooks"
+    warning: "Skips validation"
+    group: "Verification"
+
+  - id: "allow-empty"
+    flag: "--allow-empty"
+    name: "Allow Empty"
+    type: "checkbox"
+    default: false
+    description: "Allow creating a commit with no changes"
+    group: "Verification"
+
+  # Author options
+  - id: "author"
+    flag: "--author"
+    name: "Author"
+    type: "text"
+    placeholder: "Name <email@example.com>"
+    description: "Override the author for this commit"
+    group: "Author"
+
+  - id: "date"
+    flag: "--date"
+    name: "Date"
+    type: "text"
+    placeholder: "2024-01-01"
+    description: "Override the author date"
+    group: "Author"
+
+examples:
+  - name: "Simple commit"
+    values:
+      message: "fix: resolve bug"
+    output: "git commit -m 'fix: resolve bug'"
+  
+  - name: "Commit all changes"
+    values:
+      message: "update: refactor"
+      all: true
+    output: "git commit -a -m 'update: refactor'"
+
+  - name: "Amend without editing"
+    values:
+      amend: true
+      no-edit: true
+    output: "git commit --amend --no-edit"

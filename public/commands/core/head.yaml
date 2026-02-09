@@ -1,0 +1,53 @@
+id: "head"
+name: "head"
+category: "core"
+os: ["linux", "macos"]
+description: "Output the first part of files"
+base: "head"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["head", "first", "lines", "text"]
+
+args:
+  - id: "file"
+    name: "File"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "file.txt"
+    description: "File to read (optional when piping)"
+    group: "Source"
+
+  - id: "lines"
+    flag: "-n"
+    name: "Lines"
+    type: "number"
+    min: 1
+    placeholder: "10"
+    description: "Print the first N lines"
+    group: "Options"
+
+  - id: "bytes"
+    flag: "-c"
+    name: "Bytes"
+    type: "number"
+    min: 1
+    placeholder: "100"
+    description: "Print the first N bytes"
+    conflicts_with: ["lines"]
+    group: "Options"
+
+  - id: "quiet"
+    flag: "-q"
+    name: "Quiet"
+    type: "checkbox"
+    default: false
+    description: "Never print headers giving file names"
+    group: "Options"
+
+examples:
+  - name: "First 10 lines"
+    values:
+      file: "log.txt"
+      lines: 10
+    output: "head -n 10 log.txt"

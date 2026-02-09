@@ -1,0 +1,5 @@
+id: "git"
+name: "Git"
+icon: "📦"
+description: "Version control commands"
+order: 1

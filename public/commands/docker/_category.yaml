@@ -1,0 +1,5 @@
+id: "docker"
+name: "Docker"
+icon: "🐳"
+description: "Container management commands"
+order: 3

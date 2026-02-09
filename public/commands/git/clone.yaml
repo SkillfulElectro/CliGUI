@@ -1,0 +1,70 @@
+id: "git-clone"
+name: "git clone"
+category: "git"
+os: ["linux", "macos", "windows"]
+description: "Clone a repository into a new directory"
+base: "git clone"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["git", "clone", "download", "repository"]
+
+args:
+  - id: "repository"
+    name: "Repository URL"
+    type: "text"
+    positional: true
+    position: 1
+    required: true
+    placeholder: "https://github.com/user/repo.git"
+    description: "The repository to clone"
+    group: "Source"
+
+  - id: "directory"
+    name: "Directory"
+    type: "text"
+    positional: true
+    position: 2
+    placeholder: "my-project"
+    description: "The name of the new directory to clone into"
+    group: "Target"
+
+  - id: "branch"
+    flag: "-b"
+    name: "Branch"
+    type: "text"
+    placeholder: "main"
+    description: "Clone only the specified branch"
+    group: "Options"
+
+  - id: "depth"
+    flag: "--depth"
+    name: "Depth"
+    type: "number"
+    min: 1
+    placeholder: "1"
+    description: "Create a shallow clone with specified history depth"
+    group: "Options"
+
+  - id: "single-branch"
+    flag: "--single-branch"
+    name: "Single Branch"
+    type: "checkbox"
+    default: false
+    description: "Clone only the history of one branch"
+    group: "Options"
+
+  - id: "recursive"
+    flag: "--recursive"
+    name: "Recursive"
+    type: "checkbox"
+    default: false
+    description: "Initialize and clone submodules"
+    group: "Options"
+
+  - id: "bare"
+    flag: "--bare"
+    name: "Bare"
+    type: "checkbox"
+    default: false
+    description: "Create a bare repository"
+    group: "Options"

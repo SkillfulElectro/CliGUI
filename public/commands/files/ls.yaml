@@ -1,0 +1,115 @@
+id: "ls"
+name: "ls"
+category: "files"
+os: ["linux", "macos"]
+description: "List directory contents"
+base: "ls"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["ls", "list", "directory", "files"]
+
+args:
+  - id: "path"
+    name: "Path"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "."
+    description: "Directory to list"
+    group: "Source"
+
+  - id: "long"
+    flag: "-l"
+    name: "Long Format"
+    type: "checkbox"
+    default: false
+    description: "Use long listing format"
+    group: "Format"
+
+  - id: "all"
+    flag: "-a"
+    name: "All"
+    type: "checkbox"
+    default: false
+    description: "Do not ignore entries starting with ."
+    group: "Filter"
+
+  - id: "almost-all"
+    flag: "-A"
+    name: "Almost All"
+    type: "checkbox"
+    default: false
+    description: "Do not list . and .."
+    conflicts_with: ["all"]
+    group: "Filter"
+
+  - id: "human"
+    flag: "-h"
+    name: "Human Readable"
+    type: "checkbox"
+    default: false
+    description: "Print sizes in human readable format"
+    depends_on: ["long"]
+    group: "Format"
+
+  - id: "size"
+    flag: "-S"
+    name: "Sort by Size"
+    type: "checkbox"
+    default: false
+    description: "Sort by file size, largest first"
+    group: "Sort"
+
+  - id: "time"
+    flag: "-t"
+    name: "Sort by Time"
+    type: "checkbox"
+    default: false
+    description: "Sort by modification time, newest first"
+    conflicts_with: ["size"]
+    group: "Sort"
+
+  - id: "reverse"
+    flag: "-r"
+    name: "Reverse"
+    type: "checkbox"
+    default: false
+    description: "Reverse order while sorting"
+    group: "Sort"
+
+  - id: "recursive"
+    flag: "-R"
+    name: "Recursive"
+    type: "checkbox"
+    default: false
+    description: "List subdirectories recursively"
+    group: "Options"
+
+  - id: "color"
+    flag: "--color"
+    name: "Color"
+    type: "select"
+    options:
+      - value: ""
+        label: "Auto"
+      - value: "always"
+        label: "Always"
+      - value: "never"
+        label: "Never"
+    description: "Colorize output"
+    group: "Format"
+
+examples:
+  - name: "Long listing with sizes"
+    values:
+      long: true
+      all: true
+      human: true
+    output: "ls -l -a -h"
+
+  - name: "Sort by size"
+    values:
+      long: true
+      size: true
+      reverse: true
+    output: "ls -l -S -r"

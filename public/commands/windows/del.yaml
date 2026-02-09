@@ -1,0 +1,72 @@
+id: "del"
+name: "del"
+category: "windows"
+os: ["windows"]
+description: "Delete files (Windows rm equivalent)"
+base: "del"
+difficulty: "beginner"
+danger_level: "dangerous"
+tags: ["del", "delete", "remove", "files", "windows"]
+
+args:
+  - id: "path"
+    name: "Path"
+    type: "text"
+    positional: true
+    position: 1
+    required: true
+    placeholder: "file.txt"
+    description: "File or pattern to delete"
+    group: "Target"
+
+  - id: "force"
+    flag: "/f"
+    name: "Force"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Force delete read-only files"
+    warning: "⚠️ Deletes read-only files!"
+    group: "Options"
+
+  - id: "quiet"
+    flag: "/q"
+    name: "Quiet"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Quiet mode, do not ask for confirmation"
+    warning: "⚠️ No confirmation prompts!"
+    group: "Options"
+
+  - id: "subdirs"
+    flag: "/s"
+    name: "Include Subdirectories"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Delete from all subdirectories"
+    warning: "⚠️ Deletes from all subfolders!"
+    group: "Options"
+
+  - id: "prompt"
+    flag: "/p"
+    name: "Prompt"
+    type: "checkbox"
+    default: false
+    description: "Prompt for confirmation before deleting"
+    conflicts_with: ["quiet"]
+    group: "Options"
+
+examples:
+  - name: "Delete file"
+    values:
+      path: "file.txt"
+    output: "del file.txt"
+
+  - name: "Force delete all txt files"
+    values:
+      path: "*.txt"
+      force: true
+      quiet: true
+    output: "del /f /q *.txt"

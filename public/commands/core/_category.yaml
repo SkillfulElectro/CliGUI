@@ -1,0 +1,5 @@
+id: "core"
+name: "Core Utils"
+icon: "⚙️"
+description: "Common shell utilities for piping and filtering"
+order: 2

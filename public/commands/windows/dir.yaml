@@ -1,0 +1,90 @@
+id: "dir"
+name: "dir"
+category: "windows"
+os: ["windows"]
+description: "List directory contents"
+base: "dir"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["dir", "list", "directory", "files", "windows"]
+
+args:
+  - id: "path"
+    name: "Path"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "."
+    description: "Directory to list"
+    group: "Source"
+
+  - id: "bare"
+    flag: "/b"
+    name: "Bare Format"
+    type: "checkbox"
+    default: false
+    description: "Uses bare format (no heading or summary)"
+    group: "Format"
+
+  - id: "subdirs"
+    flag: "/s"
+    name: "Include Subdirectories"
+    type: "checkbox"
+    default: false
+    description: "Lists files in specified directory and all subdirectories"
+    group: "Options"
+
+  - id: "attributes"
+    flag: "/a"
+    name: "Attributes"
+    type: "select"
+    options:
+      - value: ""
+        label: "All"
+      - value: "d"
+        label: "Directories only"
+      - value: "h"
+        label: "Hidden files"
+      - value: "-d"
+        label: "Files only"
+    description: "Filter by file attributes"
+    group: "Filter"
+
+  - id: "order"
+    flag: "/o"
+    name: "Sort Order"
+    type: "select"
+    options:
+      - value: ""
+        label: "Default"
+      - value: "n"
+        label: "By name"
+      - value: "s"
+        label: "By size"
+      - value: "d"
+        label: "By date"
+      - value: "-s"
+        label: "By size (descending)"
+    description: "Sort order"
+    group: "Sort"
+
+  - id: "wide"
+    flag: "/w"
+    name: "Wide Format"
+    type: "checkbox"
+    default: false
+    description: "Uses wide list format"
+    conflicts_with: ["bare"]
+    group: "Format"
+
+examples:
+  - name: "List all files"
+    values:
+      path: "C:\\Users"
+    output: "dir C:\\Users"
+
+  - name: "Bare recursive"
+    values:
+      bare: true
+      subdirs: true
+    output: "dir /b /s"

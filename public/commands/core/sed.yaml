@@ -1,0 +1,74 @@
+id: "sed"
+name: "sed"
+category: "core"
+os: ["linux", "macos"]
+description: "Stream editor for text transformation"
+base: "sed"
+difficulty: "intermediate"
+danger_level: "safe"
+tags: ["sed", "replace", "transform", "text", "stream"]
+
+args:
+  - id: "expression"
+    flag: "-e"
+    name: "Expression"
+    type: "text"
+    required: true
+    placeholder: "s/old/new/g"
+    description: "The sed expression to execute"
+    group: "Expression"
+
+  - id: "file"
+    name: "File"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "file.txt"
+    description: "File to process (optional when piping)"
+    group: "Source"
+
+  - id: "in-place"
+    flag: "-i"
+    name: "In-Place"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Edit files in-place"
+    warning: "⚠️ Modifies files directly!"
+    group: "Options"
+
+  - id: "backup"
+    flag: "-i.bak"
+    name: "Backup"
+    type: "checkbox"
+    default: false
+    description: "Create backup before in-place edit"
+    conflicts_with: ["in-place"]
+    group: "Options"
+
+  - id: "extended"
+    flag: "-E"
+    name: "Extended Regex"
+    type: "checkbox"
+    default: false
+    description: "Use extended regular expressions"
+    group: "Options"
+
+  - id: "quiet"
+    flag: "-n"
+    name: "Quiet"
+    type: "checkbox"
+    default: false
+    description: "Suppress automatic printing of pattern space"
+    group: "Options"
+
+examples:
+  - name: "Replace text"
+    values:
+      expression: "s/foo/bar/g"
+    output: "sed -e 's/foo/bar/g'"
+
+  - name: "Delete lines containing pattern"
+    values:
+      expression: "/pattern/d"
+    output: "sed -e '/pattern/d'"

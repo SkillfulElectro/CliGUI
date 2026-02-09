@@ -1,0 +1,68 @@
+id: "cat"
+name: "cat"
+category: "core"
+os: ["linux", "macos"]
+description: "Concatenate and display files"
+base: "cat"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["cat", "display", "read", "concatenate", "files"]
+
+args:
+  - id: "file"
+    name: "File"
+    type: "text"
+    positional: true
+    position: 1
+    required: true
+    placeholder: "file.txt"
+    description: "File to display"
+    group: "Source"
+
+  - id: "number"
+    flag: "-n"
+    name: "Line Numbers"
+    type: "checkbox"
+    default: false
+    description: "Number all output lines"
+    group: "Options"
+
+  - id: "number-nonblank"
+    flag: "-b"
+    name: "Number Non-blank"
+    type: "checkbox"
+    default: false
+    description: "Number non-blank output lines only"
+    conflicts_with: ["number"]
+    group: "Options"
+
+  - id: "show-ends"
+    flag: "-E"
+    name: "Show Ends"
+    type: "checkbox"
+    default: false
+    description: "Display $ at end of each line"
+    group: "Options"
+
+  - id: "show-tabs"
+    flag: "-T"
+    name: "Show Tabs"
+    type: "checkbox"
+    default: false
+    description: "Display TAB characters as ^I"
+    group: "Options"
+
+  - id: "squeeze"
+    flag: "-s"
+    name: "Squeeze Blank"
+    type: "checkbox"
+    default: false
+    description: "Suppress repeated empty output lines"
+    group: "Options"
+
+examples:
+  - name: "Display with line numbers"
+    values:
+      file: "script.sh"
+      number: true
+    output: "cat -n script.sh"

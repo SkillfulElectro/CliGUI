@@ -1,0 +1,67 @@
+id: "tail"
+name: "tail"
+category: "core"
+os: ["linux", "macos"]
+description: "Output the last part of files"
+base: "tail"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["tail", "last", "lines", "text", "follow"]
+
+args:
+  - id: "file"
+    name: "File"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "file.txt"
+    description: "File to read (optional when piping)"
+    group: "Source"
+
+  - id: "lines"
+    flag: "-n"
+    name: "Lines"
+    type: "number"
+    min: 1
+    placeholder: "10"
+    description: "Print the last N lines"
+    group: "Options"
+
+  - id: "bytes"
+    flag: "-c"
+    name: "Bytes"
+    type: "number"
+    min: 1
+    placeholder: "100"
+    description: "Print the last N bytes"
+    conflicts_with: ["lines"]
+    group: "Options"
+
+  - id: "follow"
+    flag: "-f"
+    name: "Follow"
+    type: "checkbox"
+    default: false
+    description: "Keep reading as file grows (like watching logs)"
+    group: "Options"
+
+  - id: "quiet"
+    flag: "-q"
+    name: "Quiet"
+    type: "checkbox"
+    default: false
+    description: "Never print headers giving file names"
+    group: "Options"
+
+examples:
+  - name: "Last 20 lines"
+    values:
+      file: "log.txt"
+      lines: 20
+    output: "tail -n 20 log.txt"
+
+  - name: "Watch log file"
+    values:
+      file: "/var/log/syslog"
+      follow: true
+    output: "tail -f /var/log/syslog"

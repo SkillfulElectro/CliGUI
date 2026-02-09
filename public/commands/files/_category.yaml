@@ -1,0 +1,5 @@
+id: "files"
+name: "Files"
+icon: "📁"
+description: "File and directory operations"
+order: 4

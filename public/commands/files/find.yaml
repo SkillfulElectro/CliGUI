@@ -1,0 +1,102 @@
+id: "find"
+name: "find"
+category: "files"
+os: ["linux", "macos"]
+description: "Search for files in a directory hierarchy"
+base: "find"
+difficulty: "intermediate"
+danger_level: "safe"
+tags: ["find", "search", "files", "directory"]
+
+args:
+  - id: "path"
+    name: "Path"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "."
+    description: "Starting directory for search"
+    group: "Source"
+
+  - id: "name"
+    flag: "-name"
+    name: "Name Pattern"
+    type: "text"
+    placeholder: "*.txt"
+    description: "Base name matches pattern"
+    group: "Match"
+
+  - id: "iname"
+    flag: "-iname"
+    name: "Name (case-insensitive)"
+    type: "text"
+    placeholder: "*.TXT"
+    description: "Case-insensitive name match"
+    conflicts_with: ["name"]
+    group: "Match"
+
+  - id: "type"
+    flag: "-type"
+    name: "Type"
+    type: "select"
+    options:
+      - value: ""
+        label: "Any"
+      - value: "f"
+        label: "File"
+      - value: "d"
+        label: "Directory"
+      - value: "l"
+        label: "Symbolic Link"
+    description: "File type to match"
+    group: "Match"
+
+  - id: "size"
+    flag: "-size"
+    name: "Size"
+    type: "text"
+    placeholder: "+10M"
+    description: "File size (e.g., +10M, -1G, 100k)"
+    group: "Match"
+
+  - id: "mtime"
+    flag: "-mtime"
+    name: "Modified Days"
+    type: "text"
+    placeholder: "-7"
+    description: "Modified within N days (-N) or before (+N)"
+    group: "Match"
+
+  - id: "maxdepth"
+    flag: "-maxdepth"
+    name: "Max Depth"
+    type: "number"
+    min: 0
+    placeholder: "3"
+    description: "Maximum directory depth to search"
+    group: "Options"
+
+  - id: "exec"
+    flag: "-exec"
+    name: "Execute"
+    type: "text"
+    placeholder: "rm {} \\;"
+    description: "Execute command on each file"
+    danger: true
+    warning: "⚠️ Be careful with destructive commands!"
+    group: "Action"
+
+examples:
+  - name: "Find large files"
+    values:
+      path: "."
+      type: "f"
+      size: "+100M"
+    output: "find . -type f -size +100M"
+
+  - name: "Find recent files"
+    values:
+      path: "."
+      name: "*.log"
+      mtime: "-7"
+    output: "find . -name '*.log' -mtime -7"

@@ -1,0 +1,126 @@
+id: "grep"
+name: "grep"
+category: "core"
+os: ["linux", "macos"]
+description: "Search for patterns in text"
+base: "grep"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["grep", "search", "filter", "pattern", "regex"]
+
+args:
+  - id: "pattern"
+    name: "Pattern"
+    type: "text"
+    positional: true
+    position: 1
+    required: true
+    placeholder: "search term"
+    description: "The pattern to search for"
+    group: "Search"
+
+  - id: "file"
+    name: "File"
+    type: "text"
+    positional: true
+    position: 2
+    placeholder: "file.txt"
+    description: "File to search in (optional when piping)"
+    group: "Source"
+
+  - id: "ignore-case"
+    flag: "-i"
+    name: "Ignore Case"
+    type: "checkbox"
+    default: false
+    description: "Case-insensitive search"
+    group: "Matching"
+
+  - id: "invert"
+    flag: "-v"
+    name: "Invert Match"
+    type: "checkbox"
+    default: false
+    description: "Select non-matching lines"
+    group: "Matching"
+
+  - id: "word"
+    flag: "-w"
+    name: "Whole Word"
+    type: "checkbox"
+    default: false
+    description: "Match whole words only"
+    group: "Matching"
+
+  - id: "regex"
+    flag: "-E"
+    name: "Extended Regex"
+    type: "checkbox"
+    default: false
+    description: "Use extended regular expressions"
+    group: "Matching"
+
+  - id: "count"
+    flag: "-c"
+    name: "Count"
+    type: "checkbox"
+    default: false
+    description: "Only print a count of matching lines"
+    conflicts_with: ["line-number", "only-matching"]
+    group: "Output"
+
+  - id: "line-number"
+    flag: "-n"
+    name: "Line Numbers"
+    type: "checkbox"
+    default: false
+    description: "Prefix each line with line number"
+    group: "Output"
+
+  - id: "only-matching"
+    flag: "-o"
+    name: "Only Matching"
+    type: "checkbox"
+    default: false
+    description: "Print only the matched parts"
+    group: "Output"
+
+  - id: "context"
+    flag: "-C"
+    name: "Context Lines"
+    type: "number"
+    min: 0
+    placeholder: "3"
+    description: "Print NUM lines of context"
+    group: "Output"
+
+  - id: "recursive"
+    flag: "-r"
+    name: "Recursive"
+    type: "checkbox"
+    default: false
+    description: "Search directories recursively"
+    group: "Files"
+
+  - id: "include"
+    flag: "--include"
+    name: "Include Pattern"
+    type: "text"
+    placeholder: "*.js"
+    description: "Search only files matching pattern"
+    depends_on: ["recursive"]
+    group: "Files"
+
+examples:
+  - name: "Simple search"
+    values:
+      pattern: "error"
+      file: "log.txt"
+    output: "grep 'error' log.txt"
+
+  - name: "Case insensitive with line numbers"
+    values:
+      pattern: "warning"
+      ignore-case: true
+      line-number: true
+    output: "grep -i -n 'warning'"

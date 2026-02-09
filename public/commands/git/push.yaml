@@ -1,0 +1,96 @@
+id: "git-push"
+name: "git push"
+category: "git"
+os: ["linux", "macos", "windows"]
+description: "Update remote refs along with associated objects"
+base: "git push"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["git", "push", "remote", "upload"]
+
+args:
+  - id: "remote"
+    name: "Remote"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "origin"
+    description: "The remote repository"
+    group: "Target"
+
+  - id: "branch"
+    name: "Branch"
+    type: "text"
+    positional: true
+    position: 2
+    placeholder: "main"
+    description: "The branch to push"
+    group: "Target"
+
+  - id: "set-upstream"
+    flag: "-u"
+    name: "Set Upstream"
+    type: "checkbox"
+    default: false
+    description: "Set upstream tracking reference"
+    group: "Options"
+
+  - id: "force"
+    flag: "-f"
+    name: "Force Push"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Force updates even if not a fast-forward"
+    warning: "⚠️ Can overwrite remote history!"
+    group: "Options"
+
+  - id: "force-with-lease"
+    flag: "--force-with-lease"
+    name: "Force with Lease"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Force push only if remote hasn't changed"
+    conflicts_with: ["force"]
+    group: "Options"
+
+  - id: "tags"
+    flag: "--tags"
+    name: "Push Tags"
+    type: "checkbox"
+    default: false
+    description: "Push all tags"
+    group: "Options"
+
+  - id: "dry-run"
+    flag: "-n"
+    name: "Dry Run"
+    type: "checkbox"
+    default: false
+    description: "Do everything except actually send the updates"
+    group: "Options"
+
+  - id: "delete"
+    flag: "--delete"
+    name: "Delete"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Delete the remote branch"
+    warning: "⚠️ Permanently deletes remote branch!"
+    group: "Options"
+
+examples:
+  - name: "Push to origin main"
+    values:
+      remote: "origin"
+      branch: "main"
+    output: "git push origin main"
+
+  - name: "Set upstream"
+    values:
+      remote: "origin"
+      branch: "feature"
+      set-upstream: true
+    output: "git push -u origin feature"

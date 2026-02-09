@@ -1,0 +1,79 @@
+id: "rm"
+name: "rm"
+category: "files"
+os: ["linux", "macos"]
+description: "Remove files or directories"
+base: "rm"
+difficulty: "beginner"
+danger_level: "dangerous"
+tags: ["rm", "remove", "delete", "files"]
+
+args:
+  - id: "path"
+    name: "Path"
+    type: "text"
+    positional: true
+    position: 1
+    required: true
+    placeholder: "file.txt"
+    description: "File or directory to remove"
+    group: "Target"
+
+  - id: "recursive"
+    flag: "-r"
+    name: "Recursive"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Remove directories and their contents recursively"
+    warning: "⚠️ Deletes everything inside!"
+    group: "Options"
+
+  - id: "force"
+    flag: "-f"
+    name: "Force"
+    type: "checkbox"
+    default: false
+    danger: true
+    description: "Ignore nonexistent files, never prompt"
+    warning: "⚠️ No confirmation prompts!"
+    group: "Options"
+
+  - id: "interactive"
+    flag: "-i"
+    name: "Interactive"
+    type: "checkbox"
+    default: false
+    description: "Prompt before every removal"
+    conflicts_with: ["force"]
+    group: "Options"
+
+  - id: "verbose"
+    flag: "-v"
+    name: "Verbose"
+    type: "checkbox"
+    default: false
+    description: "Explain what is being done"
+    group: "Options"
+
+  - id: "dir"
+    flag: "-d"
+    name: "Directory"
+    type: "checkbox"
+    default: false
+    description: "Remove empty directories"
+    conflicts_with: ["recursive"]
+    group: "Options"
+
+examples:
+  - name: "Remove file"
+    values:
+      path: "file.txt"
+    output: "rm file.txt"
+
+  - name: "Remove directory"
+    values:
+      path: "folder/"
+      recursive: true
+      verbose: true
+    output: "rm -r -v folder/"

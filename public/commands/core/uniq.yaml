@@ -1,0 +1,64 @@
+id: "uniq"
+name: "uniq"
+category: "core"
+os: ["linux", "macos"]
+description: "Report or omit repeated lines"
+base: "uniq"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["uniq", "unique", "duplicate", "lines"]
+
+args:
+  - id: "file"
+    name: "File"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "file.txt"
+    description: "File to process (optional when piping)"
+    group: "Source"
+
+  - id: "count"
+    flag: "-c"
+    name: "Count"
+    type: "checkbox"
+    default: false
+    description: "Prefix lines by the number of occurrences"
+    group: "Options"
+
+  - id: "repeated"
+    flag: "-d"
+    name: "Repeated Only"
+    type: "checkbox"
+    default: false
+    description: "Only print duplicate lines"
+    conflicts_with: ["unique"]
+    group: "Filter"
+
+  - id: "unique"
+    flag: "-u"
+    name: "Unique Only"
+    type: "checkbox"
+    default: false
+    description: "Only print unique lines"
+    conflicts_with: ["repeated"]
+    group: "Filter"
+
+  - id: "ignore-case"
+    flag: "-i"
+    name: "Ignore Case"
+    type: "checkbox"
+    default: false
+    description: "Ignore differences in case when comparing"
+    group: "Options"
+
+examples:
+  - name: "Count duplicates"
+    values:
+      count: true
+    output: "uniq -c"
+
+  - name: "Show only duplicates"
+    values:
+      repeated: true
+    output: "uniq -d"

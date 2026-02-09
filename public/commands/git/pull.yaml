@@ -1,0 +1,61 @@
+id: "git-pull"
+name: "git pull"
+category: "git"
+os: ["linux", "macos", "windows"]
+description: "Fetch from and integrate with another repository or branch"
+base: "git pull"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["git", "pull", "fetch", "update"]
+
+args:
+  - id: "remote"
+    name: "Remote"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "origin"
+    description: "The remote repository"
+    group: "Target"
+
+  - id: "branch"
+    name: "Branch"
+    type: "text"
+    positional: true
+    position: 2
+    placeholder: "main"
+    description: "The branch to pull"
+    group: "Target"
+
+  - id: "rebase"
+    flag: "--rebase"
+    name: "Rebase"
+    type: "checkbox"
+    default: false
+    description: "Rebase the current branch on top of upstream after fetching"
+    group: "Strategy"
+
+  - id: "ff-only"
+    flag: "--ff-only"
+    name: "Fast-Forward Only"
+    type: "checkbox"
+    default: false
+    description: "Refuse to merge unless HEAD is up to date or can be fast-forwarded"
+    conflicts_with: ["rebase"]
+    group: "Strategy"
+
+  - id: "no-commit"
+    flag: "--no-commit"
+    name: "No Commit"
+    type: "checkbox"
+    default: false
+    description: "Perform the merge but don't commit"
+    group: "Options"
+
+  - id: "verbose"
+    flag: "-v"
+    name: "Verbose"
+    type: "checkbox"
+    default: false
+    description: "Be more verbose"
+    group: "Options"

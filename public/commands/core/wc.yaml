@@ -1,0 +1,63 @@
+id: "wc"
+name: "wc"
+category: "core"
+os: ["linux", "macos"]
+description: "Word, line, character, and byte count"
+base: "wc"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["wc", "count", "words", "lines", "bytes"]
+
+args:
+  - id: "file"
+    name: "File"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "file.txt"
+    description: "File to count (optional when piping)"
+    group: "Source"
+
+  - id: "lines"
+    flag: "-l"
+    name: "Lines Only"
+    type: "checkbox"
+    default: false
+    description: "Print only the newline count"
+    group: "Output"
+
+  - id: "words"
+    flag: "-w"
+    name: "Words Only"
+    type: "checkbox"
+    default: false
+    description: "Print only the word count"
+    group: "Output"
+
+  - id: "chars"
+    flag: "-c"
+    name: "Bytes Only"
+    type: "checkbox"
+    default: false
+    description: "Print only the byte count"
+    group: "Output"
+
+  - id: "max-line"
+    flag: "-L"
+    name: "Max Line Length"
+    type: "checkbox"
+    default: false
+    description: "Print length of the longest line"
+    group: "Output"
+
+examples:
+  - name: "Count lines"
+    values:
+      file: "file.txt"
+      lines: true
+    output: "wc -l file.txt"
+
+  - name: "Word count"
+    values:
+      words: true
+    output: "wc -w"

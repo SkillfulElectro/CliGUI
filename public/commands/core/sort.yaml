@@ -1,0 +1,79 @@
+id: "sort"
+name: "sort"
+category: "core"
+os: ["linux", "macos"]
+description: "Sort lines of text files"
+base: "sort"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["sort", "order", "lines", "text"]
+
+args:
+  - id: "file"
+    name: "File"
+    type: "text"
+    positional: true
+    position: 1
+    placeholder: "file.txt"
+    description: "File to sort (optional when piping)"
+    group: "Source"
+
+  - id: "reverse"
+    flag: "-r"
+    name: "Reverse"
+    type: "checkbox"
+    default: false
+    description: "Reverse the result of comparisons"
+    group: "Options"
+
+  - id: "numeric"
+    flag: "-n"
+    name: "Numeric Sort"
+    type: "checkbox"
+    default: false
+    description: "Compare according to string numerical value"
+    group: "Options"
+
+  - id: "unique"
+    flag: "-u"
+    name: "Unique"
+    type: "checkbox"
+    default: false
+    description: "Output only unique lines"
+    group: "Options"
+
+  - id: "ignore-case"
+    flag: "-f"
+    name: "Ignore Case"
+    type: "checkbox"
+    default: false
+    description: "Fold lower case to upper case characters"
+    group: "Options"
+
+  - id: "key"
+    flag: "-k"
+    name: "Key"
+    type: "text"
+    placeholder: "2"
+    description: "Sort by specific field/column number"
+    group: "Options"
+
+  - id: "separator"
+    flag: "-t"
+    name: "Field Separator"
+    type: "text"
+    placeholder: ","
+    description: "Use character as field separator"
+    group: "Options"
+
+examples:
+  - name: "Sort alphabetically"
+    values:
+      file: "names.txt"
+    output: "sort names.txt"
+
+  - name: "Sort numbers descending"
+    values:
+      numeric: true
+      reverse: true
+    output: "sort -n -r"

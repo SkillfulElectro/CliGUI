@@ -1,0 +1,99 @@
+id: "findstr"
+name: "findstr"
+category: "windows"
+os: ["windows"]
+description: "Search for strings in files (Windows grep equivalent)"
+base: "findstr"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["findstr", "search", "filter", "pattern", "windows", "grep"]
+
+args:
+  - id: "pattern"
+    name: "Search String"
+    type: "text"
+    positional: true
+    position: 1
+    required: true
+    placeholder: "search term"
+    description: "The string to search for"
+    group: "Search"
+
+  - id: "file"
+    name: "File"
+    type: "text"
+    positional: true
+    position: 2
+    placeholder: "file.txt"
+    description: "File to search in (optional when piping)"
+    group: "Source"
+
+  - id: "ignore-case"
+    flag: "/i"
+    name: "Ignore Case"
+    type: "checkbox"
+    default: false
+    description: "Case-insensitive search"
+    group: "Matching"
+
+  - id: "regex"
+    flag: "/r"
+    name: "Regular Expression"
+    type: "checkbox"
+    default: false
+    description: "Use search string as regular expression"
+    group: "Matching"
+
+  - id: "literal"
+    flag: "/c:"
+    name: "Literal String"
+    type: "text"
+    placeholder: "exact phrase"
+    description: "Search for literal string (with spaces)"
+    group: "Matching"
+
+  - id: "line-numbers"
+    flag: "/n"
+    name: "Line Numbers"
+    type: "checkbox"
+    default: false
+    description: "Print line number before each matching line"
+    group: "Output"
+
+  - id: "invert"
+    flag: "/v"
+    name: "Invert Match"
+    type: "checkbox"
+    default: false
+    description: "Print only lines that do NOT contain match"
+    group: "Output"
+
+  - id: "count"
+    flag: "/m"
+    name: "Only Filenames"
+    type: "checkbox"
+    default: false
+    description: "Print only filenames containing a match"
+    group: "Output"
+
+  - id: "subdirs"
+    flag: "/s"
+    name: "Search Subdirectories"
+    type: "checkbox"
+    default: false
+    description: "Search in current directory and all subdirectories"
+    group: "Options"
+
+examples:
+  - name: "Simple search"
+    values:
+      pattern: "error"
+      file: "log.txt"
+    output: "findstr 'error' log.txt"
+
+  - name: "Case insensitive with line numbers"
+    values:
+      pattern: "warning"
+      ignore-case: true
+      line-numbers: true
+    output: "findstr /i /n 'warning'"

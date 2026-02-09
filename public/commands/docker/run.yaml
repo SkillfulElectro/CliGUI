@@ -1,0 +1,143 @@
+id: "docker-run"
+name: "docker run"
+category: "docker"
+os: ["linux", "macos", "windows"]
+description: "Run a container from an image"
+base: "docker run"
+difficulty: "intermediate"
+danger_level: "safe"
+tags: ["docker", "run", "container", "image"]
+
+args:
+  - id: "image"
+    name: "Image"
+    type: "text"
+    positional: true
+    position: 1
+    required: true
+    placeholder: "nginx:latest"
+    description: "Docker image to run"
+    group: "Image"
+
+  - id: "command"
+    name: "Command"
+    type: "text"
+    positional: true
+    position: 2
+    placeholder: "/bin/bash"
+    description: "Command to run in container"
+    group: "Image"
+
+  - id: "name"
+    flag: "--name"
+    name: "Container Name"
+    type: "text"
+    placeholder: "my-container"
+    description: "Assign a name to the container"
+    group: "Basic"
+
+  - id: "detach"
+    flag: "-d"
+    name: "Detach"
+    type: "checkbox"
+    default: false
+    description: "Run container in background"
+    group: "Basic"
+
+  - id: "interactive"
+    flag: "-i"
+    name: "Interactive"
+    type: "checkbox"
+    default: false
+    description: "Keep STDIN open"
+    group: "Basic"
+
+  - id: "tty"
+    flag: "-t"
+    name: "TTY"
+    type: "checkbox"
+    default: false
+    description: "Allocate a pseudo-TTY"
+    group: "Basic"
+
+  - id: "rm"
+    flag: "--rm"
+    name: "Remove on Exit"
+    type: "checkbox"
+    default: false
+    description: "Automatically remove container when it exits"
+    group: "Basic"
+
+  - id: "port"
+    flag: "-p"
+    name: "Port"
+    type: "text"
+    placeholder: "8080:80"
+    description: "Publish port (host:container)"
+    group: "Network"
+
+  - id: "volume"
+    flag: "-v"
+    name: "Volume"
+    type: "text"
+    placeholder: "/host:/container"
+    description: "Bind mount a volume"
+    group: "Storage"
+
+  - id: "env"
+    flag: "-e"
+    name: "Environment"
+    type: "text"
+    placeholder: "KEY=value"
+    description: "Set environment variable"
+    group: "Environment"
+
+  - id: "network"
+    flag: "--network"
+    name: "Network"
+    type: "select"
+    options:
+      - value: ""
+        label: "Default"
+      - value: "bridge"
+        label: "Bridge"
+      - value: "host"
+        label: "Host"
+      - value: "none"
+        label: "None"
+    description: "Connect to a network"
+    group: "Network"
+
+  - id: "restart"
+    flag: "--restart"
+    name: "Restart Policy"
+    type: "select"
+    options:
+      - value: ""
+        label: "No (default)"
+      - value: "always"
+        label: "Always"
+      - value: "unless-stopped"
+        label: "Unless Stopped"
+      - value: "on-failure"
+        label: "On Failure"
+    description: "Restart policy for container"
+    group: "Options"
+
+examples:
+  - name: "Interactive shell"
+    values:
+      image: "ubuntu:latest"
+      command: "/bin/bash"
+      interactive: true
+      tty: true
+      rm: true
+    output: "docker run -it --rm ubuntu:latest /bin/bash"
+
+  - name: "Web server"
+    values:
+      image: "nginx:latest"
+      name: "web"
+      detach: true
+      port: "8080:80"
+    output: "docker run -d --name web -p 8080:80 nginx:latest"

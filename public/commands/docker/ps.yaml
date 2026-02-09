@@ -1,0 +1,71 @@
+id: "docker-ps"
+name: "docker ps"
+category: "docker"
+os: ["linux", "macos", "windows"]
+description: "List containers"
+base: "docker ps"
+difficulty: "beginner"
+danger_level: "safe"
+tags: ["docker", "ps", "list", "containers"]
+
+args:
+  - id: "all"
+    flag: "-a"
+    name: "All"
+    type: "checkbox"
+    default: false
+    description: "Show all containers (default shows just running)"
+    group: "Filter"
+
+  - id: "quiet"
+    flag: "-q"
+    name: "Quiet"
+    type: "checkbox"
+    default: false
+    description: "Only display container IDs"
+    group: "Output"
+
+  - id: "size"
+    flag: "-s"
+    name: "Size"
+    type: "checkbox"
+    default: false
+    description: "Display total file sizes"
+    group: "Output"
+
+  - id: "filter"
+    flag: "-f"
+    name: "Filter"
+    type: "text"
+    placeholder: "status=running"
+    description: "Filter output based on conditions"
+    group: "Filter"
+
+  - id: "format"
+    flag: "--format"
+    name: "Format"
+    type: "text"
+    placeholder: "{{.Names}}"
+    description: "Pretty-print using Go template"
+    group: "Output"
+
+  - id: "last"
+    flag: "-n"
+    name: "Last N"
+    type: "number"
+    min: 1
+    placeholder: "5"
+    description: "Show last N created containers"
+    group: "Filter"
+
+examples:
+  - name: "All containers"
+    values:
+      all: true
+    output: "docker ps -a"
+
+  - name: "Container IDs only"
+    values:
+      all: true
+      quiet: true
+    output: "docker ps -a -q"
