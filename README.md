@@ -19,7 +19,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/cligui.git
+git clone https://github.com/skillfulelectro/cligui.git
 cd cligui
 
 # Install dependencies
